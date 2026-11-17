@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NaturalPlan — Benessere olistico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --emerald:#1F6F50; --emerald-dark:#14513A; --emerald-soft:#E4F0EA;
+  --white:#FAF8F3; --gold:#C9A24A; --gold-soft:#F3EAD3;
+  --grey:#7A7F7C; --ink:#22302A; --line:#E3E0D8;
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--white);color:var(--ink);line-height:1.7;font-weight:300}
+h1,h2,h3,h4{font-family:'Montserrat',sans-serif;line-height:1.2;color:var(--emerald-dark)}
+a{color:inherit}
+img{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+header{position:sticky;top:0;z-index:50;background:rgba(250,248,243,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Montserrat';font-weight:800;font-size:1.35rem;color:var(--emerald-dark);letter-spacing:-.5px}
+.logo span{color:var(--gold)}
+.menu{display:flex;gap:4px;list-style:none}
+.menu a{text-decoration:none;font-size:.88rem;font-weight:500;padding:8px 12px;border-radius:30px;transition:.2s}
+.menu a:hover,.menu a.active{background:var(--emerald-soft);color:var(--emerald-dark)}
+.burger{display:none;background:none;border:0;font-size:1.6rem;color:var(--emerald-dark);cursor:pointer}
+
+/* VIEWS */
+.view{display:none;animation:fade .4s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* HERO */
+.hero{padding:90px 0 80px;background:radial-gradient(circle at 85% 20%,var(--gold-soft),transparent 45%),radial-gradient(circle at 10% 90%,var(--emerald-soft),transparent 50%)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+.eyebrow{display:inline-block;font-family:'Montserrat';font-weight:600;font-size:.75rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.hero h1{font-size:clamp(2.3rem,5vw,3.8rem);font-weight:800;margin-bottom:22px;letter-spacing:-1px}
+.hero h1 em{font-style:normal;color:var(--emerald)}
+.hero p{font-size:1.1rem;max-width:540px;margin-bottom:32px;color:#45524C}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Montserrat';font-weight:600;font-size:.92rem;padding:14px 26px;border-radius:40px;text-decoration:none;border:2px solid var(--emerald);cursor:pointer;transition:.2s}
+.btn-p{background:var(--emerald);color:#fff}
+.btn-p:hover{background:var(--emerald-dark)}
+.btn-o{background:transparent;color:var(--emerald-dark)}
+.btn-o:hover{background:var(--emerald-soft)}
+.btn-g{background:var(--gold);border-color:var(--gold);color:#fff}
+.btn-g:hover{filter:brightness(.93)}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero-art{aspect-ratio:1;border-radius:50%;background:conic-gradient(from 200deg,var(--emerald),#2F8A66,var(--gold),#E6D3A0,var(--emerald));position:relative;box-shadow:0 30px 80px rgba(31,111,80,.25)}
+.hero-art::after{content:"";position:absolute;inset:14%;border-radius:50%;background:var(--white);opacity:.92}
+.hero-art svg{position:absolute;inset:26%;width:48%;height:48%;z-index:2}
+
+/* SECTIONS */
+section{padding:80px 0}
+.sec-head{max-width:700px;margin-bottom:46px}
+.sec-head h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;margin-bottom:14px}
+.sec-head p{color:#4C5852}
+.page-hero{padding:70px 0 30px}
+.page-hero h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;margin-bottom:14px}
+.page-hero p{max-width:680px;font-size:1.05rem;color:#4C5852}
+.alt{background:#F2EFE7}
+
+.grid{display:grid;gap:24px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:.25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(34,48,42,.08)}
+.card h3{font-size:1.15rem;margin-bottom:10px}
+.card p{font-size:.94rem;color:#4C5852}
+.ico{width:52px;height:52px;border-radius:14px;background:var(--emerald-soft);display:grid;place-items:center;margin-bottom:18px;font-size:1.5rem}
+.tag{display:inline-block;font-size:.72rem;font-weight:500;letter-spacing:.5px;text-transform:uppercase;padding:4px 11px;border-radius:20px;background:var(--gold-soft);color:#8A6A1F;margin-bottom:12px}
+.meta{font-size:.82rem;color:var(--grey);margin-top:14px;display:flex;gap:14px;flex-wrap:wrap}
+.link{color:var(--emerald);font-weight:500;text-decoration:none;font-size:.9rem;cursor:pointer;background:none;border:0;font-family:inherit;padding:0;margin-top:14px;display:inline-block}
+.link:hover{text-decoration:underline}
+
+/* QUOTE BAND */
+.band{background:var(--emerald-dark);color:#fff;padding:70px 0;text-align:center}
+.band blockquote{font-family:'Montserrat';font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:600;max-width:820px;margin:0 auto;line-height:1.4}
+.band cite{display:block;margin-top:16px;font-style:normal;color:var(--gold);font-size:.9rem;letter-spacing:1px}
+
+/* BREATHING TOOL */
+.breath{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:28px;padding:50px}
+.circle-wrap{display:grid;place-items:center;height:320px}
+.circle{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,#3D9B76,var(--emerald));display:grid;place-items:center;color:#fff;font-family:'Montserrat';font-weight:600;font-size:1.05rem;text-align:center;box-shadow:0 0 0 18px rgba(31,111,80,.08),0 0 0 40px rgba(201,162,74,.08);transition:transform 4s ease-in-out}
+.pattern-btns{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+.pill{border:1.5px solid var(--line);background:var(--white);padding:9px 16px;border-radius:30px;font-family:inherit;font-size:.85rem;cursor:pointer;transition:.2s}
+.pill.on{border-color:var(--emerald);background:var(--emerald-soft);color:var(--emerald-dark);font-weight:500}
+.counter{font-size:.9rem;color:var(--grey);margin-top:12px}
+
+/* STEPS */
+.steps{counter-reset:s;list-style:none}
+.steps li{counter-increment:s;position:relative;padding-left:46px;margin-bottom:14px;font-size:.94rem}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--emerald-soft);color:var(--emerald-dark);font-weight:600;display:grid;place-items:center;font-size:.85rem}
+
+/* EXERCISE */
+.ex{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start}
+.ex-num{font-family:'Montserrat';font-weight:800;font-size:2.4rem;color:var(--gold);line-height:1}
+.level{display:flex;gap:4px;margin-top:4px}
+.level i{width:18px;height:5px;border-radius:3px;background:var(--line)}
+.level i.f{background:var(--emerald)}
+.filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+
+/* BOOKS */
+.book{display:grid;grid-template-columns:260px 1fr;gap:50px;align-items:center;margin-bottom:70px}
+.book:nth-child(even){grid-template-columns:1fr 260px}
+.book:nth-child(even)>div:first-child{order:2}
+.cover{aspect-ratio:2/3;border-radius:6px 16px 16px 6px;padding:30px 24px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;box-shadow:-8px 0 0 rgba(0,0,0,.12) inset,0 30px 60px rgba(34,48,42,.25);position:relative;overflow:hidden}
+.cover h3{color:#fff;font-size:1.45rem;font-weight:800;line-height:1.15}
+.cover small{font-family:'Montserrat';letter-spacing:2px;font-size:.7rem;text-transform:uppercase;opacity:.85}
+.cover .orb{position:absolute;border-radius:50%;opacity:.25}
+.c1{background:linear-gradient(160deg,var(--emerald),var(--emerald-dark))}
+.c2{background:linear-gradient(160deg,#B28A36,#7C5E1F)}
+.book h2{font-size:2rem;margin-bottom:6px}
+.book .sub{color:var(--gold);font-family:'Montserrat';font-weight:600;margin-bottom:18px}
+.book ul{margin:18px 0 26px 20px;font-size:.95rem}
+.book li{margin-bottom:6px}
+
+/* BLOG */
+.post-cover{height:150px;border-radius:12px;margin:-10px -10px 20px;display:grid;place-items:center;font-size:3rem}
+.modal{position:fixed;inset:0;background:rgba(20,30,25,.55);z-index:100;display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:40px 16px}
+.modal.on{display:flex}
+.modal-box{background:var(--white);max-width:760px;width:100%;border-radius:24px;padding:50px;position:relative}
+.modal-box h2{font-size:2rem;margin:10px 0 18px}
+.modal-box h3{font-size:1.15rem;margin:26px 0 8px}
+.modal-box p,.modal-box li{font-size:.98rem;margin-bottom:10px;color:#36423C}
+.modal-box ul{margin-left:20px}
+.close{position:absolute;top:18px;right:20px;background:var(--emerald-soft);border:0;width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;color:var(--emerald-dark)}
+.bookbox{display:grid;grid-template-columns:110px 1fr;gap:22px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:30px}
+.bookbox img{width:110px;border-radius:4px 8px 8px 4px;box-shadow:0 10px 24px rgba(34,48,42,.2)}
+.cover-img{width:100%;max-width:280px;border-radius:6px 14px 14px 6px;box-shadow:-6px 0 0 rgba(0,0,0,.08) inset,0 30px 60px rgba(34,48,42,.28)}
+.related{margin-top:22px;font-size:.9rem}
+.related a{display:block;color:var(--emerald);text-decoration:none;margin:6px 0;cursor:pointer}
+.related a:hover{text-decoration:underline}
+@media(max-width:600px){.bookbox{grid-template-columns:80px 1fr}.bookbox img{width:80px}}
+.note{background:var(--gold-soft);border-left:4px solid var(--gold);padding:16px 20px;border-radius:10px;font-size:.88rem;margin-top:26px;color:#5E4A18}
+
+/* CONTACT */
+input,textarea,select{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:.95rem;background:#fff;color:var(--ink)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--emerald)}
+.ok{display:none;background:var(--emerald-soft);color:var(--emerald-dark);padding:16px;border-radius:12px;font-weight:500}
+
+/* ROADMAP */
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tl{border-top:4px solid var(--line);padding-top:18px}
+.tl.now{border-color:var(--gold)}
+.tl b{font-family:'Montserrat';color:var(--gold);font-size:.85rem;letter-spacing:1px}
+
+footer{background:var(--ink);color:#C7CEC9;padding:60px 0 30px;font-size:.9rem}
+.f-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+footer h4{color:#fff;font-size:.95rem;margin-bottom:14px}
+footer a{display:block;text-decoration:none;margin-bottom:8px;color:#C7CEC9;cursor:pointer}
+footer a:hover{color:var(--gold)}
+.copy{border-top:1px solid #3A4842;padding-top:24px;font-size:.8rem;color:#8E9993;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media(max-width:960px){
+  .hero-grid,.breath,.book,.book:nth-child(even){grid-template-columns:1fr}
+  .book:nth-child(even)>div:first-child{order:0}
+  .cover{max-width:240px}
+  .g3,.g4,.timeline{grid-template-columns:repeat(2,1fr)}
+  .f-grid{grid-template-columns:1fr 1fr}
+  .hero-art{max-width:320px;margin:0 auto}
+  .menu{display:none;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:var(--white);padding:16px 24px;border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .burger{display:block}
+}
+@media(max-width:600px){
+  .g3,.g2,.g4,.timeline,.f-grid{grid-template-columns:1fr}
+  .modal-box,.breath{padding:30px 22px}
+  section{padding:56px 0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#home">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#1F6F50"/><path d="M20 30c-6-3-9-8-8-15 5 0 9 3 8 15zm0 0c6-3 9-8 8-15-5 0-9 3-8 15z" fill="#FAF8F3"/><circle cx="20" cy="11" r="2.5" fill="#C9A24A"/></svg>
+      Natural<span>Plan</span>
+    </a>
+    <button class="burger" aria-label="Menu" onclick="document.querySelector('.menu').classList.toggle('open')">☰</button>
+    <ul class="menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#rilassamento">Rilassamento</a></li>
+      <li><a href="#meditazioni">Meditazioni</a></li>
+      <li><a href="#pilates">Pilates</a></li>
+      <li><a href="#libri">Libri</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#centro">Il Centro</a></li>
+      <li><a href="#contatti">Contatti</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<div class="view" id="v-home">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Benessere olistico · Natural Harmony</span>
+        <h1>Ritrova l'equilibrio tra <em>corpo</em>, mente e natura.</h1>
+        <p>NaturalPlan è un percorso di benessere che unisce Pilates, meditazione, tecniche di rilassamento e rimedi naturali. Pratiche semplici, guidate, da portare nella tua vita di tutti i giorni.</p>
+        <div class="btns">
+          <a class="btn btn-p" href="#pilates">Inizia con il Pilates</a>
+          <a class="btn btn-o" href="#meditazioni">Prova una meditazione</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 100 100"><path d="M50 85C30 75 20 58 24 32c16 2 28 14 26 53zm0 0c20-10 30-27 26-53-16 2-28 14-26 53z" fill="#1F6F50"/><path d="M50 85c-3-20-2-38 0-55 2 17 3 35 0 55z" fill="#C9A24A"/><circle cx="50" cy="20" r="6" fill="#C9A24A"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Cosa trovi qui</span>
+        <h2>Un unico posto per prenderti cura di te</h2>
+        <p>Contenuti gratuiti, lezioni guidate e letture per accompagnarti passo dopo passo.</p>
+      </div>
+      <div class="grid g3">
+        <a class="card" href="#rilassamento" style="text-decoration:none"><div class="ico">🌿</div><h3>Metodi di rilassamento</h3><p>Respirazione, rilassamento muscolare progressivo, body scan: tecniche pratiche per sciogliere tensione e stress.</p></a>
+        <a class="card" href="#meditazioni" style="text-decoration:none"><div class="ico">🧘</div><h3>Meditazioni guidate</h3><p>Pratiche da 5 a 20 minuti per iniziare la giornata, ritrovare la calma o prepararti al sonno.</p></a>
+        <a class="card" href="#pilates" style="text-decoration:none"><div class="ico">💪</div><h3>Esercizi di Pilates</h3><p>Sequenze per tutti i livelli, dal core ai fondamentali, spiegate da un istruttore certificato PowerPilates.</p></a>
+        <a class="card" href="#libri" style="text-decoration:none"><div class="ico">📖</div><h3>I miei libri</h3><p>"Il tuo corpo, il tuo centro" e "La noia, il vero motore della vita": due percorsi pratici per il corpo e per la mente.</p></a>
+        <a class="card" href="#blog" style="text-decoration:none"><div class="ico">🍃</div><h3>Blog rimedi naturali</h3><p>Articoli su erbe, tisane, alimentazione consapevole e abitudini naturali per il benessere quotidiano.</p></a>
+        <a class="card" href="#centro" style="text-decoration:none"><div class="ico">🏡</div><h3>Il Centro NaturalPlan</h3><p>Yoga, massaggi, trattamenti, nutrizione, eventi culturali: le discipline del centro olistico che sta nascendo.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <div class="wrap">
+      <blockquote>"Il benessere non è una meta da raggiungere, ma un modo di camminare ogni giorno."</blockquote>
+      <cite>— NATURALPLAN</cite>
+    </div>
+  </div>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="grid g2" style="align-items:center;gap:60px">
+        <div>
+          <span class="eyebrow">Chi sono</span>
+          <h2 style="font-size:2.2rem;margin-bottom:18px">Alessandro Marchetti</h2>
+          <p style="margin-bottom:14px">Sono un istruttore di Pilates certificato <b>PowerPilates (New York)</b> e autore di due libri sul benessere interiore e sulla consapevolezza del corpo.</p>
+          <p style="margin-bottom:24px">Ho creato NaturalPlan con un'idea semplice: rendere il benessere olistico accessibile a tutti, unendo il rigore del movimento con la calma della meditazione e la saggezza dei rimedi naturali. Un progetto che cresce passo dopo passo, come ogni buona pratica.</p>
+          <div class="btns"><a class="btn btn-p" href="#contatti">Prenota una lezione</a><a class="btn btn-o" href="#libri">Scopri i libri</a></div>
+        </div>
+        <div class="grid g2">
+          <div class="card" style="text-align:center"><h3 style="font-size:2.2rem;color:var(--gold)">PowerPilates</h3><p>Certificazione New York</p></div>
+          <div class="card" style="text-align:center"><h3 style="font-size:2.2rem;color:var(--gold)">2</h3><p>Libri pubblicati</p></div>
+          <div class="card" style="text-align:center"><h3 style="font-size:2.2rem;color:var(--gold)">Online</h3><p>Lezioni individuali e di gruppo</p></div>
+          <div class="card" style="text-align:center"><h3 style="font-size:2.2rem;color:var(--gold)">8+</h3><p>Discipline in arrivo</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Dal blog</span><h2>Ultimi articoli</h2></div>
+      <div class="grid g3" id="home-posts"></div>
+      <div style="margin-top:30px"><a class="btn btn-o" href="#blog">Tutti gli articoli</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ RILASSAMENTO ============ -->
+<div class="view" id="v-rilassamento">
+  <div class="page-hero"><div class="wrap">
+    <span class="eyebrow">Metodi di rilassamento</span>
+    <h1>Sciogli la tensione, respira la calma</h1>
+    <p>Tecniche semplici e collaudate che puoi praticare ovunque: a casa, in ufficio, prima di dormire. Inizia con lo strumento di respirazione guidata qui sotto.</p>
+  </div></div>
+
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="breath">
+        <div>
+          <span class="tag">Strumento interattivo</span>
+          <h2 style="font-size:1.9rem;margin-bottom:12px">Respirazione guidata</h2>
+          <p style="color:#4C5852">Scegli una tecnica, premi "Inizia" e segui il cerchio: si espande quando inspiri, si contrae quando espiri.</p>
+          <div class="pattern-btns" id="patterns">
+            <button class="pill on" data-p="4,4,4,4" data-n="Box breathing">Box 4-4-4-4</button>
+            <button class="pill" data-p="4,7,8,0" data-n="4-7-8">4-7-8 (sonno)</button>
+            <button class="pill" data-p="5,0,5,0" data-n="Coerenza cardiaca">Coerenza 5-5</button>
+          </div>
+          <div class="btns">
+            <button class="btn btn-p" id="bStart">▶ Inizia</button>
+            <button class="btn btn-o" id="bStop">■ Stop</button>
+          </div>
+          <div class="counter" id="bCount">Cicli completati: 0</div>
+        </div>
+        <div class="circle-wrap"><div class="circle" id="circle">Pronto</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Tecniche</span><h2>Cinque metodi da conoscere</h2></div>
+      <div class="grid g2">
+        <div class="card">
+          <span class="tag">15 minuti</span><h3>Rilassamento muscolare progressivo</h3>
+          <p style="margin-bottom:14px">Il metodo di Jacobson: contrai e rilascia i gruppi muscolari uno alla volta per imparare a riconoscere e sciogliere la tensione.</p>
+          <ol class="steps"><li>Sdraiati comodo e chiudi gli occhi.</li><li>Contrai i piedi per 5 secondi, poi rilascia per 15.</li><li>Sali: polpacci, cosce, glutei, addome, mani, braccia, spalle, viso.</li><li>Concludi con 3 respiri profondi, sentendo tutto il corpo morbido.</li></ol>
+        </div>
+        <div class="card">
+          <span class="tag">10 minuti</span><h3>Body scan</h3>
+          <p style="margin-bottom:14px">Una scansione lenta e attenta del corpo, dalla testa ai piedi, senza giudicare le sensazioni.</p>
+          <ol class="steps"><li>Porta l'attenzione alla sommità del capo.</li><li>Scendi lentamente: fronte, mascella, collo, spalle.</li><li>Nota calore, peso, formicolii, tensioni. Respira lì.</li><li>Arriva fino alle punte dei piedi, poi osserva il corpo intero.</li></ol>
+        </div>
+        <div class="card">
+          <span class="tag">3 minuti</span><h3>Respirazione diaframmatica</h3>
+          <p style="margin-bottom:14px">La base di tutto: respirare con la pancia attiva il sistema nervoso parasimpatico, quello del "riposo".</p>
+          <ol class="steps"><li>Una mano sul petto, una sull'addome.</li><li>Inspira dal naso: si solleva solo la mano sull'addome.</li><li>Espira lentamente dalla bocca, più a lungo dell'inspiro.</li><li>Ripeti per 10 respiri.</li></ol>
+        </div>
+        <div class="card">
+          <span class="tag">5 minuti</span><h3>Grounding 5-4-3-2-1</h3>
+          <p style="margin-bottom:14px">Utile nei momenti di agitazione: riporta la mente al presente attraverso i sensi.</p>
+          <ol class="steps"><li>Nomina 5 cose che vedi.</li><li>4 cose che puoi toccare.</li><li>3 suoni che senti.</li><li>2 profumi e 1 sapore.</li></ol>
+        </div>
+        <div class="card" style="grid-column:1/-1">
+          <span class="tag">Serale</span><h3>Rituale di decompressione prima del sonno</h3>
+          <p>Spegni gli schermi 45 minuti prima di dormire, abbassa le luci, prepara una tisana calda (camomilla, melissa o tiglio), fai 5 minuti di allungamento dolce e chiudi con 10 cicli di respirazione 4-7-8. La costanza conta più della durata: ripetuto ogni sera, il corpo impara ad associare questi gesti al riposo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ MEDITAZIONI ============ -->
+<div class="view" id="v-meditazioni">
+  <div class="page-hero"><div class="wrap">
+    <span class="eyebrow">Meditazioni guidate</span>
+    <h1>Fermati. Osserva. Respira.</h1>
+    <p>Pratiche brevi per ogni momento della giornata. Imposta il timer, leggi le istruzioni e lasciati guidare. Le versioni audio arriveranno presto sul canale YouTube NaturalPlan.</p>
+  </div></div>
+
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="card" style="display:flex;flex-wrap:wrap;gap:30px;align-items:center;justify-content:space-between;margin-bottom:40px;background:var(--emerald-dark);color:#fff;border:0">
+        <div><h3 style="color:#fff;font-size:1.5rem">Timer di meditazione</h3><p style="color:#CFE3D9">Scegli la durata e medita in silenzio. Un suono dolce ti avviserà alla fine.</p></div>
+        <div style="text-align:center">
+          <div id="tDisplay" style="font-family:Montserrat;font-weight:800;font-size:3.2rem;color:var(--gold)">05:00</div>
+          <div class="pattern-btns" style="justify-content:center;margin:10px 0" id="tMins">
+            <button class="pill on" data-m="5">5'</button><button class="pill" data-m="10">10'</button><button class="pill" data-m="15">15'</button><button class="pill" data-m="20">20'</button>
+          </div>
+          <div class="btns" style="justify-content:center"><button class="btn btn-g" id="tStart">▶ Avvia</button><button class="btn btn-o" style="color:#fff;border-color:#fff" id="tReset">↺ Reset</button></div>
+        </div>
+      </div>
+
+      <div class="grid g3" id="med-list"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ PILATES ============ -->
+<div class="view" id="v-pilates">
+  <div class="page-hero"><div class="wrap">
+    <span class="eyebrow">Esercizi di Pilates</span>
+    <h1>Forza dal centro, leggerezza nel movimento</h1>
+    <p>Esercizi a corpo libero del metodo Pilates, selezionati e spiegati da un istruttore certificato PowerPilates. Esegui ogni movimento con controllo, coordinandolo al respiro.</p>
+  </div></div>
+
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="note" style="margin:0 0 30px">⚠️ Prima di iniziare un nuovo programma di attività fisica, soprattutto in caso di dolori, gravidanza o patologie, consulta il tuo medico. Fermati se senti dolore.</div>
+      <div class="filter" id="pFilter">
+        <button class="pill on" data-l="all">Tutti</button>
+        <button class="pill" data-l="1">Principiante</button>
+        <button class="pill" data-l="2">Intermedio</button>
+        <button class="pill" data-l="3">Avanzato</button>
+      </div>
+      <div class="grid g2" id="ex-list"></div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">I 6 principi</span><h2>Le basi del metodo Pilates</h2></div>
+      <div class="grid g3">
+        <div class="card"><h3>Centratura</h3><p>Ogni movimento parte dal "powerhouse": addome, lombari, glutei e pavimento pelvico.</p></div>
+        <div class="card"><h3>Concentrazione</h3><p>La mente guida il corpo: presenza totale su ciò che stai facendo.</p></div>
+        <div class="card"><h3>Controllo</h3><p>Nessun movimento è lasciato al caso o allo slancio.</p></div>
+        <div class="card"><h3>Precisione</h3><p>Meglio poche ripetizioni perfette che tante eseguite male.</p></div>
+        <div class="card"><h3>Respirazione</h3><p>Respiro laterale toracico, coordinato con ogni fase del movimento.</p></div>
+        <div class="card"><h3>Fluidità</h3><p>Movimenti continui e armoniosi, senza scatti.</p></div>
+      </div>
+      <div class="card" style="margin-top:30px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px">
+        <div><h3>Vuoi un programma su misura?</h3><p>Lezioni individuali online, adattate al tuo livello e ai tuoi obiettivi.</p></div>
+        <a class="btn btn-p" href="#contatti">Prenota una lezione</a>
+      </div>
+      <div class="bookbox" style="margin-top:24px"><img src="corpo.jpg" alt="Copertina di Il tuo corpo, il tuo centro"><div><span class="tag">Il percorso completo</span><h3 style="margin:4px 0 6px">Il tuo corpo, il tuo centro</h3><p style="font-size:.9rem;margin-bottom:14px">20 giorni, 20 esercizi di movimento, respiro e meditazione che diventano una sequenza da 30 minuti.</p><div class="btns"><a class="btn btn-g" href="https://www.amazon.it/dp/B0HN8HVCHS" target="_blank" rel="noopener">Acquista su Amazon</a><a class="btn btn-o" href="#libri">Scopri il libro</a></div></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ LIBRI ============ -->
+<div class="view" id="v-libri">
+  <div class="page-hero"><div class="wrap">
+    <span class="eyebrow">I miei libri</span>
+    <h1>Letture da vivere, non solo da leggere</h1>
+    <p>Due percorsi pratici, con esercizi passo dopo passo: uno per tornare ad abitare il corpo, uno per ridare spazio alla mente.</p>
+  </div></div>
+
+  <section style="padding-top:30px">
+    <div class="wrap">
+      <div class="book">
+        <div><img class="cover-img" src="corpo.jpg" alt="Copertina di Il tuo corpo, il tuo centro"></div>
+        <div>
+          <span class="tag">Corpo · Respiro · Pilates · 152 pagine</span>
+          <h2>Il tuo corpo, il tuo centro</h2>
+          <div class="sub">Un percorso pratico di riconnessione con il tuo corpo</div>
+          <p>Viviamo dal collo in su e ci ricordiamo del corpo solo quando qualcosa si rompe. Questo libro ti riporta dentro: <b>venti giorni, venti esercizi da due minuti</b>, che si sommano giorno dopo giorno fino a diventare una sequenza completa da mezz'ora, dalla posizione seduta a quella in piedi, poi a terra e di nuovo seduti.</p>
+          <ul>
+            <li><b>Le fondamenta</b>: osservare il corpo, respirare con il diaframma, radicarsi a terra.</li>
+            <li><b>I sette centri</b>, dalla radice alla corona, usati come mappa per orientare l'attenzione e sempre collegati a ciò che il corpo fa davvero: respiro, postura, sistema nervoso.</li>
+            <li><b>La sequenza completa</b> in versione da 30 e da 15 minuti, con varianti per il mattino e la sera.</li>
+            <li>Errori comuni, glossario e il <b>diario dei 20 giorni</b> da compilare.</li>
+          </ul>
+          <p style="font-style:italic;color:var(--emerald-dark);margin-bottom:24px">"Il tuo corpo è il tuo centro. Torna a casa ogni volta che puoi."</p>
+          <div class="btns"><a class="btn btn-g" href="https://www.amazon.it/dp/B0HN8HVCHS" target="_blank" rel="noopener">Acquista su Amazon</a><a class="btn btn-o" href="mailto:info@naturalplan.it?subject=Copia%20autografata">Richiedi copia autografata</a></div>
+          <div class="related" id="rel-corpo"></div>
+        </div>
+      </div>
+
+      <div class="book">
+        <div><img class="cover-img" src="noia.jpg" alt="Copertina di La noia, il vero motore della vita"></div>
+        <div>
+          <span class="tag">Mente · Creatività · Lavoro · 144 pagine</span>
+          <h2>La noia, il vero motore della vita</h2>
+          <div class="sub">Come annoiarsi consapevolmente e lasciare spazio alle idee che cambiano le cose</div>
+          <p>Ogni attesa, ogni vuoto, lo riempiamo con il telefono. E se il problema fosse proprio questo? Quasi tutto ciò che di nuovo hai pensato è arrivato quando non stavi cercando: sotto la doccia, guidando, fissando il soffitto. Questo libro mostra come trasformare la noia da nemico a <b>motore</b>, distinguendo la noia passiva che svuota da quella consapevole che genera idee.</p>
+          <ul>
+            <li><b>Quattro parti</b>: capire la noia, la noia come motore creativo, la noia sul lavoro, vivere con la noia.</li>
+            <li><b>14 capitoli e 14 esercizi</b>, dai "dieci minuti di niente" al digiuno da stimoli, fino alla lettera da aprire tra un anno.</li>
+            <li>Storie concrete di persone comuni, dalla coda all'ufficio postale al magazzino, al forno di quartiere.</li>
+            <li>Un capitolo onesto su quando la noia <b>non</b> è un motore, ma un segnale da ascoltare.</li>
+          </ul>
+          <p style="font-style:italic;color:var(--emerald-dark);margin-bottom:24px">"Le idee sono come il vento. Non si possono comandare. Si può solo tenere le vele aperte."</p>
+          <div class="btns"><a class="btn btn-g" href="https://www.amazon.it/dp/B0HP2B9JF5" target="_blank" rel="noopener">Acquista su Amazon</a><a class="btn btn-o" href="mailto:info@naturalplan.it?subject=Copia%20autografata">Richiedi copia autografata</a></div>
+          <div class="related" id="rel-noia"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ BLOG ============ -->
+<div class="view" id="v-blog">
+  <div class="page-hero"><div class="wrap">
+    <span class="eyebrow">Blog</span>
+    <h1>Rimedi naturali e benessere quotidiano</h1>
+    <p>Erbe, tisane, alimentazione e abitudini sane, raccontate in modo semplice. Le informazioni hanno scopo divulgativo e non sostituiscono il parere del medico.</p>
+  </div></div>
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="filter" id="bFilter"></div>
+      <div class="grid g3" id="blog-list"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ CENTRO ============ -->
+<div class="view" id="v-centro">
+  <div class="page-hero"><div class="wrap">
+    <span class="eyebrow">Il Centro NaturalPlan</span>
+    <h1>Un centro olistico che cresce con te</h1>
+    <p>NaturalPlan nasce online e diventerà un centro fisico dedicato al benessere a 360°. Queste sono le discipline che lo comporranno.</p>
+  </div></div>
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="grid g4">
+        <div class="card"><div class="ico">🤸</div><h3>Pilates</h3><p>Lezioni individuali e di gruppo, a corpo libero e con piccoli attrezzi.</p><span class="tag" style="margin-top:12px;background:var(--emerald-soft);color:var(--emerald-dark)">Disponibile online</span></div>
+        <div class="card"><div class="ico">🧘‍♀️</div><h3>Yoga</h3><p>Hatha e yoga dolce per flessibilità, equilibrio e calma mentale.</p><span class="tag" style="margin-top:12px">In arrivo</span></div>
+        <div class="card"><div class="ico">🕯️</div><h3>Meditazione</h3><p>Percorsi di mindfulness e meditazione guidata, singoli e di gruppo.</p><span class="tag" style="margin-top:12px">In arrivo</span></div>
+        <div class="card"><div class="ico">💆</div><h3>Massaggi</h3><p>Massaggi rilassanti e decontratturanti con operatori qualificati.</p><span class="tag" style="margin-top:12px">In arrivo</span></div>
+        <div class="card"><div class="ico">🌸</div><h3>Trattamenti</h3><p>Trattamenti olistici per il benessere di corpo e mente.</p><span class="tag" style="margin-top:12px">In arrivo</span></div>
+        <div class="card"><div class="ico">🥗</div><h3>Nutrizione</h3><p>Consulenze con professionisti per un'alimentazione equilibrata.</p><span class="tag" style="margin-top:12px">In arrivo</span></div>
+        <div class="card"><div class="ico">🌱</div><h3>Omeopatia</h3><p>Consulenze con professionisti abilitati del settore.</p><span class="tag" style="margin-top:12px">In arrivo</span></div>
+        <div class="card"><div class="ico">🎭</div><h3>Eventi culturali</h3><p>Workshop, presentazioni di libri, ritiri e incontri a tema.</p><span class="tag" style="margin-top:12px">In arrivo</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Il percorso</span><h2>Come sta nascendo NaturalPlan</h2></div>
+      <div class="timeline">
+        <div class="tl now"><b>FASE 1 · ORA</b><h3 style="margin:8px 0">Presenza digitale</h3><p style="font-size:.92rem">Sito, social, contenuti gratuiti e lezioni online.</p></div>
+        <div class="tl"><b>FASE 2</b><h3 style="margin:8px 0">Lo spazio fisico</h3><p style="font-size:.92rem">Apertura della prima sede e nuove discipline.</p></div>
+        <div class="tl"><b>FASE 3</b><h3 style="margin:8px 0">Offerta completa</h3><p style="font-size:.92rem">Team di professionisti, trattamenti ed eventi.</p></div>
+        <div class="tl"><b>FASE 4</b><h3 style="margin:8px 0">Accademia</h3><p style="font-size:.92rem">Formazione online e nuove sedi.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ CONTATTI ============ -->
+<div class="view" id="v-contatti">
+  <div class="page-hero"><div class="wrap">
+    <span class="eyebrow">Contatti</span>
+    <h1>Parliamone</h1>
+    <p>Vuoi prenotare una lezione di Pilates online, avere informazioni sui libri o sul centro? Scrivimi.</p>
+  </div></div>
+  <section style="padding-top:20px">
+    <div class="wrap grid g2" style="gap:50px">
+      <div class="card">
+        <div class="ico">✉️</div>
+        <h3 style="font-size:1.5rem;margin-bottom:10px">Scrivimi una mail</h3>
+        <p style="margin-bottom:22px">Lezioni di Pilates online, copie autografate dei libri, informazioni sul centro o collaborazioni: premi il pulsante e si aprirà il tuo programma di posta.</p>
+        <a class="btn btn-p" href="mailto:info@naturalplan.it?subject=Richiesta%20informazioni%20NaturalPlan">✉ Contattami</a>
+        <p style="margin-top:18px;font-size:.9rem;color:var(--grey)">Oppure scrivi direttamente a <b style="color:var(--emerald-dark)">info@naturalplan.it</b></p>
+      </div>
+      <div>
+        <h3 style="margin-bottom:14px">Seguimi</h3>
+        <p style="margin-bottom:24px">Contenuti gratuiti ogni settimana: esercizi, meditazioni e consigli naturali.</p>
+        <div class="grid g2">
+          <div class="card"><b>Instagram</b><p>@naturalplan</p></div>
+          <div class="card"><b>YouTube</b><p>NaturalPlan</p></div>
+          <div class="card"><b>Facebook</b><p>NaturalPlan</p></div>
+          <div class="card"><b>TikTok</b><p>@naturalplan</p></div>
+        </div>
+        <div class="card" style="margin-top:24px"><b>Email</b><p>info@naturalplan.it</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <div class="logo" style="color:#fff;margin-bottom:14px">Natural<span>Plan</span></div>
+        <p>Benessere olistico per corpo, mente e natura. Pilates, meditazione, rilassamento e rimedi naturali.</p>
+              </div>
+      <div><h4>Pratiche</h4><a href="#rilassamento">Rilassamento</a><a href="#meditazioni">Meditazioni</a><a href="#pilates">Pilates</a></div>
+      <div><h4>Contenuti</h4><a href="#libri">Libri</a><a href="#blog">Blog</a><a href="#centro">Il Centro</a></div>
+      <div><h4>Info</h4><a href="#contatti">Contatti</a><a href="#contatti">Prenota una lezione</a><a href="#contatti">Privacy e Cookie</a></div>
+    </div>
+    <div class="copy"><span>© 2026 NaturalPlan · Alessandro Marchetti</span><span>I contenuti hanno scopo informativo e non sostituiscono il parere medico.</span></div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box"><button class="close" onclick="closeModal()">✕</button><div id="modal-c"></div></div>
+</div>
+
+<script>
+/* ---------- DATI ---------- */
+const meditations=[
+ {t:"Risveglio consapevole",d:"5 min",c:"Mattino",i:"🌅",s:["Siediti con la schiena dritta, prima di prendere il telefono.","Fai tre respiri profondi, sentendo l'aria fresca entrare.","Formula un'intenzione semplice per la giornata.","Ascolta i suoni intorno a te per un minuto, senza etichettarli.","Apri gli occhi lentamente e sorridi."]},
+ {t:"Respiro e presenza",d:"10 min",c:"Base",i:"🌬️",s:["Chiudi gli occhi e porta l'attenzione al respiro naturale.","Senti il punto dove l'aria tocca le narici.","Quando la mente vaga, riportala gentilmente al respiro.","Conta i respiri da 1 a 10, poi ricomincia.","Ogni distrazione è un'occasione per tornare: non giudicarti."]},
+ {t:"Il tuo centro",d:"10 min",c:"Corpo",i:"🎯",s:["Siediti o sdraiati. Porta le mani sull'addome.","Visualizza un punto luminoso dietro l'ombelico: il tuo centro.","A ogni inspiro la luce si espande, a ogni espiro si stabilizza.","Senti la stabilità che parte da lì e si irradia nel corpo.","Ripeti mentalmente: 'Sono stabile, sono centrato'."]},
+ {t:"Gentilezza amorevole",d:"15 min",c:"Emozioni",i:"💚",s:["Porta alla mente un'immagine di te stesso sereno.","Ripeti: 'Che io possa stare bene, che io possa essere in pace'.","Estendi l'augurio a una persona cara.","Poi a una persona neutra, poi a una con cui hai difficoltà.","Infine a tutti gli esseri viventi."]},
+ {t:"Abitare la noia",d:"10 min",c:"Mente",i:"⏳",s:["Siediti senza fare nulla. Nessun obiettivo.","Nota l'impulso di muoverti, controllare, riempire.","Non seguirlo: osservalo come una nuvola che passa.","Chiediti: 'Cosa emerge quando non faccio nulla?'.","Annota alla fine un'idea o un desiderio comparso."]},
+ {t:"Verso il sonno",d:"20 min",c:"Sera",i:"🌙",s:["Sdraiati a letto, luci spente.","Fai 4 cicli di respirazione 4-7-8.","Esegui un body scan dai piedi alla testa, rilasciando ogni zona.","Immagina un luogo sicuro nella natura: dettagli, suoni, profumi.","Lascia che il respiro diventi lento e lasciati andare."]}
+];
+const exercises=[
+ {n:"The Hundred",l:1,f:"Riscaldamento, core, respirazione",r:"10 cicli da 10 battiti",s:"Supino, gambe a tavolino, testa e spalle sollevate. Braccia tese lungo i fianchi battono su e giù: inspira per 5 battiti, espira per 5. Mantieni l'ombelico verso la colonna."},
+ {n:"Pelvic Curl",l:1,f:"Mobilità della colonna, glutei",r:"8 ripetizioni",s:"Supino, ginocchia piegate, piedi a terra. Espirando arrotola il bacino e solleva la colonna vertebra dopo vertebra fino alle scapole. Inspira in alto, espira scendendo lentamente."},
+ {n:"Spine Stretch Forward",l:1,f:"Allungamento posteriore, postura",r:"6 ripetizioni",s:"Seduto, gambe divaricate alla larghezza del tappetino, piedi a martello. Espirando arrotola la colonna in avanti come per superare una palla. Inspira e risali impilando le vertebre."},
+ {n:"Single Leg Stretch",l:2,f:"Core, coordinazione",r:"10 per lato",s:"Supino, testa sollevata. Una gamba al petto con le mani sulla caviglia e sul ginocchio, l'altra tesa a 45°. Alterna le gambe con controllo, mantenendo il bacino stabile."},
+ {n:"Saw",l:2,f:"Rotazione, obliqui, flessibilità",r:"5 per lato",s:"Seduto, gambe divaricate, braccia aperte a T. Ruota il busto verso una gamba e, espirando, porta il mignolo oltre il piede opposto come una sega. Inspira e torna al centro."},
+ {n:"Swan Prep",l:1,f:"Estensori della schiena, apertura del petto",r:"6 ripetizioni",s:"Prono, mani sotto le spalle, gomiti vicini al corpo. Inspirando solleva lentamente testa e petto allungando la colonna, senza comprimere la zona lombare. Espira e torna giù."},
+ {n:"Side Kick Series",l:2,f:"Glutei, stabilità laterale",r:"10 per lato",s:"Sul fianco, corpo allineato, testa sulla mano. Solleva la gamba superiore all'altezza dell'anca e calcia in avanti due volte, poi indietro una. Il busto resta fermo."},
+ {n:"Teaser",l:3,f:"Core avanzato, equilibrio",r:"5 ripetizioni",s:"Supino, braccia sopra la testa. Espirando solleva contemporaneamente busto e gambe tese formando una V, braccia parallele alle gambe. Inspira in equilibrio, espira e scendi con controllo."},
+ {n:"Roll Over",l:3,f:"Mobilità e controllo della colonna",r:"5 ripetizioni",s:"Supino, gambe tese a 90°. Espirando porta le gambe oltre la testa sollevando il bacino, divarica i piedi e srotola la colonna lentamente fino a tornare con le gambe a 45°."},
+ {n:"Plank con Leg Pull",l:3,f:"Forza globale, spalle, core",r:"6 per lato",s:"In plank sulle mani, corpo in linea dalla testa ai talloni. Solleva una gamba tesa senza ruotare il bacino, torna giù e alterna. Mantieni le spalle lontane dalle orecchie."}
+];
+const BOOKS={
+ corpo:{t:"Il tuo corpo, il tuo centro",s:"Un percorso pratico di riconnessione con il tuo corpo",img:"corpo.jpg",url:"https://www.amazon.it/dp/B0HN8HVCHS"},
+ noia:{t:"La noia, il vero motore della vita",s:"Come annoiarsi consapevolmente e lasciare spazio alle idee che cambiano le cose",img:"noia.jpg",url:"https://www.amazon.it/dp/B0HP2B9JF5"}
+};
+const posts=[
+ {id:"tisane-sera",d:"2026-01-07",t:"Camomilla, melissa e tiglio: le tisane della sera",c:"Erbe e tisane",i:"🌼",bg:"#F3EAD3",m:"5 min",book:"corpo",ex:"Tre piante tradizionali per accompagnare il rilassamento serale: come prepararle e come inserirle in un piccolo rituale.",
+  b:`<p>Una tisana calda prima di dormire è uno dei gesti più antichi e semplici per dire al corpo che la giornata è finita. Tre piante in particolare sono da sempre legate al relax.</p>
+  <h3>Camomilla, melissa, tiglio</h3><p>La <b>camomilla</b> è la più conosciuta, tradizionalmente usata anche dopo i pasti. La <b>melissa</b>, dal profumo di limone, è da sempre scelta nei momenti di nervosismo. I fiori di <b>tiglio</b> danno un infuso rotondo, perfetto nelle sere fredde. Si possono anche mescolare.</p>
+  <h3>Come prepararla</h3><ul><li>Un cucchiaino di fiori secchi per tazza.</li><li>Acqua appena sotto il bollore.</li><li>Infusione coperta 5–7 minuti, così gli aromi non evaporano.</li><li>Bevila 30–60 minuti prima di andare a letto.</li></ul>
+  <h3>Il rituale conta più della pianta</h3><p>In <i>Il tuo corpo, il tuo centro</i> propongo una sequenza serale: ritmo lento, espirazione lunga (quattro tempi dentro, otto fuori), luci basse e nessuno schermo prima e dopo. Una tisana sorseggiata in silenzio, subito dopo, diventa l'ultimo gesto di quella sequenza: un segnale che il corpo impara a riconoscere.</p>`},
+ {id:"respiro-tre-zone",d:"2026-01-19",t:"Il diaframma, il muscolo della calma che abbiamo dimenticato",c:"Respiro",i:"🌬️",bg:"#E4F0EA",m:"6 min",book:"corpo",ex:"I neonati respirano con la pancia, noi adulti con le spalle. Ecco come recuperare il respiro in tre zone.",
+  b:`<p>Il respiro è l'unica funzione vitale che è insieme automatica e volontaria: il cuore non lo puoi comandare, il respiro sì. Ed è attraverso di lui che puoi influenzare il battito, la tensione, lo stato d'animo.</p>
+  <h3>Il muscolo dimenticato</h3><p>Il diaframma è una grande cupola tra torace e addome. Quando inspiri scende come uno stantuffo e la pancia si gonfia. Osserva un neonato che dorme: respira così. Crescendo, stress, ore seduti e l'abitudine di "tenere in dentro la pancia" spostano il respiro in alto, nel petto e nelle spalle, che non sono fatte per lavorare ventimila volte al giorno.</p>
+  <h3>Le tre zone</h3><ul><li><b>Addome</b>: la base, il respiro della calma.</li><li><b>Costole</b>: si aprono di lato come un ombrello.</li><li><b>Petto alto</b>: solo alla fine, senza alzare le spalle.</li></ul>
+  <h3>Prova adesso</h3><p>Una mano sulla pancia, una sul petto. Inspira in quattro tempi lasciando salire solo la mano in basso, espira in sei. La chiave è l'<b>espirazione più lunga</b>: è lì che il nervo vago, il "freno" del sistema nervoso, lavora di più.</p>
+  <p>È il secondo giorno del percorso di <i>Il tuo corpo, il tuo centro</i>, la base su cui poggiano tutti gli altri esercizi.</p>`},
+ {id:"zenzero-curcuma",d:"2026-01-30",t:"Zenzero e curcuma: due radici per il fuoco digestivo",c:"Alimentazione",i:"🫚",bg:"#F7E3C8",m:"5 min",book:"corpo",ex:"Come usare zenzero e curcuma ogni giorno, e perché la tradizione parla di un 'fuoco' che digerisce cibo ed esperienze.",
+  b:`<p>Nella tradizione ayurvedica esiste il concetto di <i>agni</i>, il fuoco digestivo: quando è forte il corpo assimila ciò che serve ed elimina il resto. Zenzero e curcuma sono da sempre considerate radici "calde", amiche di questo fuoco.</p>
+  <h3>Idee pratiche</h3><ul><li><b>Infuso del mattino</b>: fettine di zenzero fresco in acqua calda con limone.</li><li><b>Golden milk</b>: latte (anche vegetale) con curcuma, zenzero, cannella e un pizzico di pepe nero.</li><li><b>Vellutate</b> di zucca o lenticchie con curcuma e un filo d'olio a crudo: pepe e grassi ne favoriscono l'assorbimento, secondo un consiglio tradizionale.</li></ul>
+  <h3>Digerire non è solo una questione di cibo</h3><p>Diciamo che una notizia "non l'abbiamo digerita" o che una situazione ci "è rimasta sullo stomaco". Non è solo un modo di dire: sotto stress il sistema nervoso toglie energia alla digestione. Per questo, nel nono giorno di <i>Il tuo corpo, il tuo centro</i>, al fuoco del centro dedico una torsione dolce a terra, dove è il peso, non la forza, a muovere la colonna.</p>
+  <h3>Attenzione</h3><p>Chi assume anticoagulanti, ha calcoli biliari, è in gravidanza o segue terapie dovrebbe chiedere al medico prima di consumarne quantità elevate o integratori.</p>`},
+ {id:"dieci-minuti-niente",d:"2026-02-02",t:"Dieci minuti di niente: l'esercizio più semplice (e più difficile)",c:"Mente",i:"⏳",bg:"#F5EBDD",m:"5 min",book:"noia",ex:"Siediti, metti via il telefono, imposta un timer. Non fare niente. Ecco cosa succede nei primi minuti, e perché vale la pena attraversarli.",
+  b:`<p>C'è un momento, nella giornata di quasi tutti, che nessuno racconta: quando non stai facendo niente e non sai bene cosa fare. In coda alla posta, in sala d'attesa, sul divano la domenica. E quasi sempre facciamo la stessa cosa: prendiamo il telefono.</p>
+  <h3>La noia è un segnale, come la fame</h3><p>La fame non è un difetto del corpo: ti dice che hai bisogno di nutrimento. La noia funziona allo stesso modo: la mente ti chiede qualcosa di diverso, spesso <b>spazio</b> più che stimoli. Riempirla subito con uno schermo è come rispondere alla fame con un pacchetto di patatine.</p>
+  <h3>L'esercizio</h3><ul><li>Scegli dieci minuti liberi e un posto qualunque.</li><li>Telefono in un'altra stanza, niente musica né libro.</li><li>Imposta un timer e non fare niente: non meditare, non "pensare a qualcosa di utile".</li><li>Ogni volta che senti l'impulso di alzarti, notalo e basta.</li><li>Alla fine annota: quanti impulsi, quando il disagio è stato più forte, se è arrivata un'idea inaspettata.</li></ul>
+  <p>Il disagio dei primi minuti non è la noia: è la <b>resistenza</b> alla noia. Ripetuto per qualche giorno, il numero di impulsi quasi sempre scende. È il primo esercizio di <i>La noia, il vero motore della vita</i>.</p>`},
+ {id:"tre-punti-piede",d:"2026-02-16",t:"Radicarsi: i tre punti del piede che sostengono tutta la postura",c:"Corpo e movimento",i:"🦶",bg:"#E8E1D3",m:"5 min",book:"corpo",ex:"Ventisei ossa, decine di articolazioni e un triangolo da cui dipendono ginocchia, bacino e schiena.",
+  b:`<p>C'è una legge che governa ogni istante della tua vita fisica: la gravità. Puoi combatterla, irrigidendoti per "tenerti su", oppure usarla, lasciando che il peso scenda nelle ossa e da lì nel pavimento, che ti restituisce la spinta.</p>
+  <h3>Il triangolo del piede</h3><p>Base dell'alluce, base del mignolo, centro del tallone. Quando il peso è distribuito su questi tre punti, l'arco plantare si solleva da solo e tutta la gamba si allinea. Un appoggio sbilanciato, invece, costringe ginocchia, bacino e schiena a compensare.</p>
+  <h3>La postura dell'albero radicato</h3><ul><li>In piedi, piedi paralleli alla larghezza del bacino.</li><li>Oscilla avanti e indietro, poi di lato, rimpicciolendo il movimento fino a fermarti al centro.</li><li>Senti i tre punti, ammorbidisci le ginocchia.</li><li>Immagina un filo che ti allunga dalla sommità del capo.</li><li>Sei respiri: espirando il peso scende come radici, inspirando la colonna sale.</li></ul>
+  <p>Il sistema nervoso legge la stabilità come un segnale di sicurezza: riportare il peso verso il basso è uno dei modi più rapidi per uscire dall'ansia. Puoi farlo in fila alla cassa, nessuno se ne accorgerà. È il terzo giorno di <i>Il tuo corpo, il tuo centro</i>.</p>`},
+ {id:"idee-doccia",d:"2026-03-02",t:"Perché le idee migliori arrivano sotto la doccia",c:"Mente",i:"🚿",bg:"#E1ECEF",m:"6 min",book:"noia",ex:"La mente ha due turni, come una bottega: uno esegue, l'altro inventa. E il secondo lavora solo quando il primo si ferma.",
+  b:`<p>Per molto tempo si è pensato che, quando non facciamo niente, il cervello sia "a riposo". Poi i ricercatori hanno notato che alcune aree diventano più attive proprio quando smettiamo di concentrarci: è la cosiddetta <b>rete di default</b>.</p>
+  <h3>I due turni della bottega</h3><p>Il <b>turno di giorno</b> è la mente concentrata: ordinata, efficiente, lavora su ciò che ha davanti. Il <b>turno di notte</b> è la mente vagabonda: salta tra ricordi e progetti e, proprio grazie a questo disordine, collega cose lontane. Il primo è il falegname che esegue gli ordini, il secondo quello che inventa.</p>
+  <h3>Perché proprio la doccia</h3><ul><li>Un'attività automatica che tiene occupato il corpo.</li><li>Nessuno schermo, nessuno che ti chiede qualcosa.</li><li>Un ambiente caldo, rilassato, povero di stimoli.</li></ul>
+  <p>Lo stesso vale per camminare, lavare i piatti, guidare su una strada conosciuta. Ma attenzione: la mente vagabonda rimescola il materiale che le hai dato. <b>Prima si lavora sul serio, poi si lascia andare</b>, come le due metà di un respiro.</p>
+  <p>Ne parlo nel capitolo 2 di <i>La noia, il vero motore della vita</i>, con l'esercizio del "quaderno del soffitto".</p>`},
+ {id:"pavimento-pelvico",d:"2026-03-16",t:"Il pavimento pelvico, la radice del corpo",c:"Corpo e movimento",i:"🌱",bg:"#EADCD0",m:"6 min",book:"corpo",ex:"Un'amaca di muscoli che si muove con il respiro: quando si rilascia, tutto il corpo riceve un messaggio di sicurezza.",
+  b:`<p>Le tradizioni orientali collocano alla base della colonna il primo centro, <i>Muladhara</i>, la radice: stabilità, sicurezza, bisogni primari. Nel corpo esiste una struttura che corrisponde in modo sorprendente a questa posizione: il <b>pavimento pelvico</b>.</p>
+  <h3>Un cilindro che respira</h3><p>È un insieme di muscoli a forma di amaca tra pube, coccige e ischi. Quando inspiri e il diaframma scende, scende leggermente anche lui; quando espiri, entrambi risalgono, come coperchio e fondo dello stesso cilindro. Nel Pilates questo cilindro si chiama <b>powerhouse</b>: la forza nasce dal basso e dal centro, non dalle braccia.</p>
+  <h3>Quando resta contratto</h3><p>In una persona tesa questo movimento si blocca: respiro alto, bacino rigido, un trattenimento costante. Imparare a sentire e a rilasciare questa zona è uno dei modi più profondi per dire al corpo che è al sicuro.</p>
+  <h3>La discesa alla terra</h3><p>Piedi larghi, punte un po' aperte. Scendi espirando verso l'accosciata, talloni a terra, schiena lunga; resta per quattro respiri sentendo il pavimento pelvico che si rilascia; risali inspirando. Se i talloni si sollevano, usa una coperta arrotolata o una sedia.</p>
+  <p>È il quarto giorno di <i>Il tuo corpo, il tuo centro</i>.</p>`},
+ {id:"oli-essenziali",d:"2026-03-23",t:"Oli essenziali: lavanda, menta e arancio dolce",c:"Aromaterapia",i:"💧",bg:"#EDE6F5",m:"5 min",book:null,ex:"Una piccola guida per iniziare a usare gli oli essenziali in casa in modo sicuro.",
+  b:`<p>Gli oli essenziali sono estratti molto concentrati di piante aromatiche. Usati con attenzione rendono più piacevoli i momenti di relax e di pratica.</p>
+  <h3>Tre oli per iniziare</h3><ul><li><b>Lavanda</b>: il profumo classico della sera e della meditazione.</li><li><b>Menta piperita</b>: fresca, ideale per studio e lavoro.</li><li><b>Arancio dolce</b>: allegro e avvolgente per gli ambienti di casa.</li></ul>
+  <h3>Regole di sicurezza</h3><ul><li>Non ingerirli e non applicarli puri sulla pelle: vanno diluiti in un olio vettore (es. mandorla).</li><li>Fai un test su una piccola zona di pelle.</li><li>Tienili lontano da bambini e animali: alcuni oli sono tossici per cani e gatti.</li><li>In gravidanza, allattamento o con bambini piccoli chiedi prima al medico.</li><li>Il diffusore è il modo più semplice: 3–5 gocce bastano.</li></ul>`},
+ {id:"dormire-meglio",d:"2026-04-06",t:"Dormire meglio in modo naturale: 7 abitudini",c:"Abitudini",i:"🌙",bg:"#DDE5EF",m:"6 min",book:"corpo",ex:"Prima dei rimedi viene l'igiene del sonno: piccoli cambiamenti quotidiani che fanno una grande differenza.",
+  b:`<ul><li><b>Orari regolari</b>, anche nel weekend.</li><li><b>Luce del mattino</b>: dieci minuti all'aperto appena sveglio aiutano l'orologio biologico.</li><li><b>Caffeina entro le 14</b>.</li><li><b>Cena leggera</b>, due o tre ore prima di dormire.</li><li><b>Stop schermi</b> 45 minuti prima di andare a letto.</li><li><b>Camera fresca e buia</b>, intorno ai 18–19 °C.</li><li><b>Un rituale serale</b> sempre uguale.</li></ul>
+  <h3>Il rituale della sera</h3><p>In <i>Il tuo corpo, il tuo centro</i> la sequenza serale ha un obiettivo preciso: sciogliere le tensioni della giornata e preparare il sistema nervoso al riposo. Ritmo lento, espirazione doppia rispetto all'inspirazione, più tempo nell'"abbraccio della terra" (la posizione del bambino) e nel "respiro dell'ape". E si può finire direttamente a letto, lasciando che il respiro continui da solo finché arriva il sonno.</p>
+  <p>Se l'insonnia è persistente, parlane con il tuo medico: può avere cause che è importante valutare.</p>`},
+ {id:"bacino-ileopsoas",d:"2026-04-13",t:"Il bacino bloccato e il 'muscolo della paura'",c:"Corpo e movimento",i:"🌊",bg:"#F6E1CC",m:"5 min",book:"corpo",ex:"Ore seduti, imbarazzo, emozioni trattenute: perché il bacino è la zona che dimentichiamo, e come restituirgli movimento.",
+  b:`<p>Il bacino è il centro geometrico del corpo, eppure per molti è quasi immobile: passiamo ore con le anche piegate a novanta gradi, i flessori si accorciano, i glutei si indeboliscono, la zona lombare si irrigidisce.</p>
+  <h3>L'ileopsoas</h3><p>È l'unico muscolo che collega direttamente la colonna alle gambe, passando dentro il bacino, ed è legato al diaframma. Molti terapeuti del movimento lo chiamano "muscolo della paura" perché si contrae nelle reazioni di allarme, preparandoci a raggomitolarci o fuggire. Cronicamente contratto contribuisce a mal di schiena, postura chiusa e respiro bloccato.</p>
+  <h3>Le emozioni sono come l'acqua</h3><p>Il secondo centro, <i>Svadhisthana</i>, è associato all'acqua: se scorre resta limpida, se ristagna diventa torbida. Il movimento fluido è uno dei modi più antichi per far circolare ciò che tratteniamo.</p>
+  <h3>I cerchi del bacino</h3><p>In piedi, ginocchia morbide, mani sui fianchi. Bacino avanti e indietro, poi di lato, poi cerchi lenti come se mescolassi l'acqua in una bacinella: sei per senso. Dove il cerchio "scatta" il bacino è più bloccato: rallenta lì.</p>
+  <p>Giorni 6 e 7 di <i>Il tuo corpo, il tuo centro</i>.</p>`},
+ {id:"noia-passiva-consapevole",d:"2026-04-27",t:"Noia passiva e noia consapevole: stesse parole, pomeriggi opposti",c:"Mente",i:"🌧️",bg:"#E3E6EA",m:"6 min",book:"noia",ex:"Due fratelli, una domenica di pioggia: uno scorre video per tre ore, l'altro esce a camminare. Entrambi dicono 'mi sono annoiato'.",
+  b:`<p>Andrea passa il pomeriggio sul letto a scorrere video. Dopo tre ore ha gli occhi secchi e la sensazione di aver mangiato molto senza nutrirsi. Luca lascia il telefono sulla scrivania ed esce a camminare sotto la pioggia, senza auricolari. Torna con due piccole decisioni chiare. A cena entrambi rispondono: "Niente, mi sono annoiato".</p>
+  <h3>Le tre differenze</h3><ul><li><b>La scelta</b>: la noia passiva si subisce, quella consapevole si sceglie.</li><li><b>Lo stimolo</b>: la prima è piena di stimoli rapidi e deboli, la seconda è lenta e semplice.</li><li><b>L'esito</b>: dopo la prima sei più stanco, dopo la seconda spesso più leggero e chiaro.</li></ul>
+  <p>Il test più semplice è una domanda: <b>come mi sento dopo?</b></p>
+  <h3>I due secondi della scelta</h3><p>Tra la sensazione di noia e la mano che va al telefono c'è uno spazio brevissimo. Tre domande aiutano ad allargarlo: cosa sto cercando adesso? Come mi sentirò tra un'ora? Cosa succederebbe se restassi qui cinque minuti?</p>
+  <p>Dal capitolo 3 di <i>La noia, il vero motore della vita</i>.</p>`},
+ {id:"secondo-cervello",d:"2026-05-11",t:"La pancia, il nostro secondo cervello",c:"Corpo e movimento",i:"☀️",bg:"#FBEFC9",m:"6 min",book:"corpo",ex:"Il plesso solare non è solo un termine esoterico: è una rete di nervi reale, e la pancia parla al cervello più di quanto pensiamo.",
+  b:`<p>Il terzo centro, <i>Manipura</i>, si trova tra ombelico e sterno ed è associato al fuoco: forza, volontà, trasformazione. Il nome "plesso solare" però è anatomico: indica una rete di nervi dietro lo stomaco che si irradia verso gli organi come i raggi del sole.</p>
+  <h3>Il secondo cervello</h3><p>Le pareti dell'intestino contengono un sistema nervoso proprio, con centinaia di milioni di neuroni, che comunica con il cervello attraverso il nervo vago. Gran parte di questa comunicazione va dalla pancia verso la testa. Non sorprende che le emozioni si sentano "nello stomaco".</p>
+  <h3>Il centro di forza</h3><p>Ogni movimento passa da qui: dalle gambe al tronco, dal tronco alle braccia. Joseph Pilates insisteva che tutto debba nascere dal centro. Non servono addominali scolpiti, ma la capacità di attivare in modo leggero il trasverso dell'addome, coordinato con il respiro.</p>
+  <h3>Il centro che si accende</h3><p>Supino, espirando immagina una cerniera che sale dal pube all'ombelico, senza schiacciare la schiena. Poi ginocchia sopra le anche, braccia al soffitto, e allunga lentamente gamba e braccio opposti. Il fuoco giusto è controllato, non esplosivo.</p>
+  <p>Giorno 8 di <i>Il tuo corpo, il tuo centro</i>.</p>`},
+ {id:"digestione-semi",d:"2026-05-25",t:"Finocchio, menta e anice: le erbe del dopo pasto",c:"Erbe e tisane",i:"🌿",bg:"#E2EEDD",m:"4 min",book:"corpo",ex:"Infusi tradizionali per chiudere il pasto con leggerezza, e un gesto semplice per aiutare la pancia a rilassarsi.",
+  b:`<p>Molte tradizioni chiudono il pasto con semi o foglie aromatiche: in India si masticano semi di finocchio, nel Mediterraneo si beve un infuso di menta o di anice.</p>
+  <h3>Tre infusi del dopo pasto</h3><ul><li><b>Semi di finocchio</b>: un cucchiaino leggermente schiacciato, dieci minuti in acqua calda coperta.</li><li><b>Menta piperita</b>: fresca e profumata; meglio evitarla se soffri di reflusso.</li><li><b>Anice verde</b>: dolce, si abbina bene al finocchio.</li></ul>
+  <h3>Rilassamento e digestione vanno insieme</h3><p>Il sistema nervoso in modalità di riposo è descritto in fisiologia come <i>rest and digest</i>, "riposa e digerisci". Un addome morbido manda al cervello segnali di calma, e la calma aiuta l'addome a lavorare. Dopo cena, qualche minuto con le mani sulla pancia e un respiro lento è già un piccolo rimedio.</p>
+  <p>Evita invece torsioni ed esercizi a pancia in giù subito dopo mangiato: meglio aspettare almeno un'ora e mezza, come consiglio in <i>Il tuo corpo, il tuo centro</i>.</p>`},
+ {id:"respiro-ape",d:"2026-06-08",t:"Il respiro dell'ape: un ronzio che calma il sistema nervoso",c:"Respiro",i:"🐝",bg:"#FFF1C2",m:"5 min",book:"corpo",ex:"Bhramari è una delle tecniche di respiro più antiche dello yoga. Bastano sei respiri per sentirne l'effetto.",
+  b:`<p>Appoggia una mano sul petto e pronuncia una "M" prolungata: sentirai la vibrazione sotto il palmo. Il tuo corpo, letteralmente, risuona.</p>
+  <h3>Perché funziona</h3><ul><li><b>Allunga l'espirazione</b>: per emettere un suono continuo devi espirare lentamente, ed è proprio ciò che fa il corpo quando si rilassa.</li><li><b>Vibra vicino al nervo vago</b>, che passa dalla gola: alcuni ricercatori ipotizzano che il canto e il ronzio contribuiscano a stimolarlo.</li><li><b>Occupa la mente</b>: è difficile rimuginare mentre ascolti il tuo suono vibrare nella testa.</li></ul>
+  <h3>Come si fa</h3><ol><li>Seduto, schiena lunga, occhi chiusi.</li><li>Pollici a chiudere delicatamente le orecchie.</li><li>Inspira dal naso.</li><li>Espira a bocca chiusa con un ronzio morbido: mmmmm.</li><li>Sei respiri, poi ascolta il silenzio che resta.</li></ol>
+  <p>Se ti senti stordito, fermati e respira normalmente. È il giorno 13 di <i>Il tuo corpo, il tuo centro</i>, dedicato al centro della gola.</p>`},
+ {id:"bagni-di-bosco",d:"2026-06-15",t:"Bagni di bosco: la natura come rimedio senza istruzioni",c:"Abitudini",i:"🌲",bg:"#D9E8DA",m:"5 min",book:"noia",ex:"Camminare tra gli alberi lentamente, senza meta e senza cuffie. Una pratica giapponese che ha molto a che fare con la noia.",
+  b:`<p>In Giappone si chiama <i>shinrin-yoku</i>, "immersione nel bosco": camminare lentamente tra gli alberi, usando i sensi, senza obiettivi sportivi.</p>
+  <h3>Come praticarlo</h3><ul><li>Scegli un bosco o un parco con molti alberi.</li><li>Lascia il telefono in fondo allo zaino, in silenzioso.</li><li>Cammina più lentamente del solito, fermati spesso.</li><li>Tocca una corteccia, annusa la terra bagnata, ascolta i suoni lontani.</li><li>Siediti dieci minuti senza fare niente.</li></ul>
+  <h3>Una camminata senza meta</h3><p>Nel bosco succede qualcosa che conosciamo da bambini: dopo i primi minuti di irrequietezza, i sensi si risvegliano e le cose semplici tornano interessanti. È lo stesso percorso del "digiuno da stimoli" che racconto in <i>La noia, il vero motore della vita</i>: astinenza, vuoto, risveglio. Il bosco è uno dei posti migliori per attraversarlo.</p>`},
+ {id:"digiuno-stimoli",d:"2026-06-22",t:"Il digiuno da stimoli: ricalibrare l'attenzione in una settimana",c:"Mente",i:"📵",bg:"#E6E2EE",m:"6 min",book:"noia",ex:"Una mente sempre sazia dimentica il sapore delle cose semplici. Un programma graduale per ritrovarlo.",
+  b:`<p>Se mangi ogni giorno cibi molto salati e dolci, un piatto semplice ti sembra insipido. Con l'attenzione succede lo stesso: i contenuti digitali sono il cibo molto saporito della mente, e tutto ciò che è lento (una conversazione, un libro, il proprio pensiero) inizia a sembrare insopportabile.</p>
+  <h3>Le tre fasi</h3><ul><li><b>Astinenza</b>: le mani cercano il telefono, irrequietezza.</li><li><b>Vuoto</b>: ci si annoia davvero. Scomodo, ma è qui che la mente si riorganizza.</li><li><b>Risveglio</b>: i sensi si fanno più acuti, le idee arrivano.</li></ul>
+  <h3>Il programma graduale</h3><ul><li><b>Giorni 1–2</b>: lascia vuote tre "piccole tasche" della giornata (ascensore, caffè, semaforo).</li><li><b>Giorni 3–4</b>: un'ora al giorno senza schermi.</li><li><b>Giorni 5–6</b>: mezza giornata senza schermi.</li><li><b>Giorno 7</b>: bilancio sul quaderno.</li></ul>
+  <p>Non si tratta di eliminare la tecnologia, ma di ridurre gli stimoli rapidi per far spazio a quelli lenti. Capitolo 7 di <i>La noia, il vero motore della vita</i>.</p>`},
+ {id:"occhi-palming",d:"2026-07-06",t:"Occhi stanchi da schermo: movimenti e palming",c:"Corpo e movimento",i:"👁️",bg:"#E1E4F2",m:"5 min",book:"corpo",ex:"Gli occhi sono fatti per scrutare l'orizzonte, non per fissare un rettangolo a 50 cm. Due minuti per restituire loro movimento e buio.",
+  b:`<p>Molte persone accumulano una tensione costante tra le sopracciglia, proprio dove le tradizioni collocano il sesto centro, <i>Ajna</i>, il terzo occhio: attenzione e percezione.</p>
+  <h3>Lo sguardo e il sistema nervoso</h3><p>In allerta lo sguardo si restringe: visione a tunnel. Quando siamo rilassati si allarga e la visione periferica si apre. Funziona anche al contrario: ammorbidire lo sguardo manda un segnale di sicurezza. Per questo guardare il mare o il cielo calma quasi subito.</p>
+  <h3>L'esercizio</h3><ol><li>Testa ferma, si muovono solo gli occhi.</li><li>Su e giù, destra e sinistra, diagonali: tre volte ciascuno, come seguendo una piuma.</li><li>Due cerchi lenti per senso.</li><li>Sfrega i palmi fino a scaldarli e appoggiali a coppa sugli occhi chiusi, senza premere.</li><li>Quattro respiri nel buio e nel calore, lasciando distendere la fronte.</li></ol>
+  <p>Puoi farlo anche in ufficio tra una riunione e l'altra. Giorno 14 di <i>Il tuo corpo, il tuo centro</i>.</p>`},
+ {id:"camminare-scalzi",d:"2026-07-13",t:"Camminare scalzi: risvegliare gli 'occhi' dei piedi",c:"Corpo e movimento",i:"🏖️",bg:"#F4E7D1",m:"4 min",book:"corpo",ex:"La pianta del piede è ricchissima di recettori. L'estate è il momento ideale per restituirle il contatto con il terreno.",
+  b:`<p>Per gran parte dell'anno i nostri piedi vivono chiusi in scarpe rigide e camminano su superfici piatte. Eppure la pianta del piede è uno degli "occhi" con cui il corpo percepisce il mondo: informa continuamente il cervello su posizione ed equilibrio.</p>
+  <h3>Come iniziare</h3><ul><li>Prato, sabbia, pavimento di casa: superfici sicure e pulite.</li><li>Pochi minuti al giorno, aumentando gradualmente.</li><li>Cammina lentamente, sentendo tallone, bordo esterno, avampiede e dita.</li><li>Fermati e prova a stare su un piede solo, lasciando che faccia le sue piccole correzioni.</li></ul>
+  <h3>Stabilità non è immobilità</h3><p>Un albero non resiste al vento restando rigido: oscilla e torna al centro. Gli esercizi di equilibrio allenano la propriocezione e, insieme, la presenza: non si può stare su una gamba sola pensando ad altro. È il tema del giorno 5 di <i>Il tuo corpo, il tuo centro</i>.</p>
+  <p>Con diabete, problemi circolatori o ferite ai piedi, chiedi prima al medico.</p>`},
+ {id:"agenda-piena",d:"2026-07-20",t:"Il mito dell'agenda piena: occupato non vuol dire produttivo",c:"Mente",i:"🗓️",bg:"#E9E4DA",m:"6 min",book:"noia",ex:"Un'agenda senza spazi vuoti è come uno spartito senza pause: corretto, ma impossibile da suonare.",
+  b:`<p>Stefano aveva un calendario che i colleghi chiamavano "il Tetris": blocchi colorati dalle 8:30 alle 18:30, senza un buco. Quando il direttore gli chiese un'idea nuova, scoprì di non avere un solo momento per pensarci. L'idea arrivò su una panchina, durante un appuntamento cancellato.</p>
+  <h3>Lavoro reattivo e generativo</h3><p>Gran parte delle agende è piena di <b>lavoro reattivo</b>: rispondere, aggiornare, gestire urgenze. Il <b>lavoro generativo</b> (pensare, migliorare, immaginare) è silenzioso e mai urgente. Senza protezione, vince sempre il primo.</p>
+  <h3>Il residuo dell'attenzione</h3><p>Passando da un impegno all'altro senza pause, una parte della mente resta attaccata a quello precedente. Dieci minuti vuoti tra due blocchi lasciano decantare il residuo, come un liquido torbido che si schiarisce.</p>
+  <h3>Prova la "panchina"</h3><p>Blocca nel calendario un'ora a settimana senza riunioni, mail né obiettivi, e dagli un nome. Trattala come un appuntamento con un cliente.</p>
+  <p>Capitolo 8 di <i>La noia, il vero motore della vita</i>.</p>`},
+ {id:"narici-alterne",d:"2026-08-03",t:"Respirazione a narici alterne: la calma vigile",c:"Respiro",i:"🌗",bg:"#E5E8F0",m:"5 min",book:"corpo",ex:"Sole e luna, attività e riposo: una tecnica semplice per riequilibrare i due lati prima di un impegno o prima di dormire.",
+  b:`<p>Se fai attenzione, quasi mai respiri in modo uguale dalle due narici: una è sempre un po' più libera, e la prevalenza si alterna nell'arco della giornata. È il ciclo nasale, regolato dal sistema nervoso autonomo. Lo yoga lo conosceva da secoli e lo legava a due canali: <i>ida</i>, lunare e calmante, e <i>pingala</i>, solare e attivante.</p>
+  <h3>Come si fa (nadi shodhana)</h3><ol><li>Seduto, mano destra davanti al viso: pollice per la narice destra, anulare per la sinistra.</li><li>Chiudi la destra, inspira dalla sinistra in quattro tempi.</li><li>Chiudi la sinistra, espira dalla destra in sei tempi.</li><li>Inspira dalla destra, cambia, espira dalla sinistra.</li><li>Sei cicli, respiro silenzioso.</li></ol>
+  <p>La regola per non confonderti: <b>si cambia lato dopo l'inspirazione</b>. Con il naso chiuso, rimanda o eseguila mentalmente.</p>
+  <p>Il risultato è una calma vigile, né assonnata né agitata. Giorno 18 di <i>Il tuo corpo, il tuo centro</i>.</p>`},
+ {id:"lavanda",d:"2026-08-24",t:"Lavanda: dal giardino al cuscino",c:"Erbe e tisane",i:"💜",bg:"#ECE3F3",m:"4 min",book:null,ex:"Raccolta, essiccazione e tre usi semplici della pianta più profumata dell'estate.",
+  b:`<p>La lavanda è forse la pianta aromatica più amata del Mediterraneo. Tra fine giugno e agosto è il momento di raccoglierla.</p>
+  <h3>Raccolta ed essiccazione</h3><ul><li>Taglia gli steli al mattino, quando la rugiada si è asciugata e i fiori sono appena aperti.</li><li>Lega piccoli mazzetti e appendili a testa in giù in un luogo ombreggiato e ventilato.</li><li>Dopo due o tre settimane sgrana i fiori e conservali in un vaso di vetro.</li></ul>
+  <h3>Tre usi semplici</h3><ul><li><b>Sacchetti profumati</b> nell'armadio o vicino al cuscino.</li><li><b>Pediluvio serale</b>: una manciata di fiori in acqua tiepida.</li><li><b>Infuso</b>: pochi fiori (quelli per uso alimentare), magari mescolati a camomilla.</li></ul>
+  <p>Come ogni pianta può dare sensibilità: se hai allergie o segui terapie, chiedi al medico o al farmacista.</p>`},
+ {id:"rientro-settembre",d:"2026-08-31",t:"Il rientro di settembre senza ansia: tre rituali piccoli",c:"Abitudini",i:"🍂",bg:"#F2E2CF",m:"5 min",book:"noia",ex:"Le buone intenzioni durano una settimana, i rituali una vita. Come portare un po' di vacanza dentro le giornate normali.",
+  b:`<p>Si torna dalle vacanze con la promessa di "fare le cose con più calma". Dopo una settimana la vita riprende il sopravvento. Il problema non è la convinzione: è la mancanza di <b>struttura</b>.</p>
+  <h3>Perché i rituali funzionano</h3><ul><li><b>Eliminano la decisione</b>: non devi scegliere ogni volta.</li><li><b>Si appoggiano a ciò che esiste</b>: il caffè, un tragitto, il dopo-cena.</li><li><b>Sono piccoli</b>: dieci minuti si mantengono anche nei giorni peggiori.</li></ul>
+  <h3>Tre idee per settembre</h3><ul><li><b>La finestra del mattino</b>: caffè in piedi davanti alla finestra, telefono in un'altra stanza.</li><li><b>La strada lunga</b>: un tragitto al giorno senza cuffie.</li><li><b>Il balcone della sera</b>: cinque minuti all'aperto prima di accendere qualunque schermo.</li></ul>
+  <p>Nel capitolo 12 di <i>La noia, il vero motore della vita</i> Silvia, mamma di due bambini con un lavoro part-time, ricava così mezz'ora al giorno senza togliere niente a nessuno.</p>`},
+ {id:"mappa-chakra",d:"2026-09-07",t:"I sette chakra senza misticismo: una mappa per il corpo",c:"Corpo e movimento",i:"🌈",bg:"#EEE6D8",m:"7 min",book:"corpo",ex:"Non organi da ecografia, ma un linguaggio sorprendentemente efficace per orientare l'attenzione nel corpo.",
+  b:`<p>Dire "ascolta il corpo" è come dire "ascolta la città": troppo vasto. Serve una mappa con delle tappe. Le tradizioni dell'India ne hanno elaborata una: i <b>chakra</b>, "ruote", sette centri lungo l'asse del corpo.</p>
+  <h3>Una mappa simbolica, con riscontri concreti</h3><p>I chakra non si vedono in un'ecografia. Ma i sette centri corrispondono a zone in cui la scienza riconosce importanti incroci di nervi, muscoli e organi: il "centro del cuore" è dove respiro e postura cambiano quando siamo commossi; la "gola" è dove la voce si strozza quando non diciamo ciò che pensiamo.</p>
+  <h3>I sette centri</h3><ul><li><b>Radice</b> (gambe, base della colonna): stabilità.</li><li><b>Sacrale</b> (bacino): fluidità, emozioni.</li><li><b>Plesso solare</b> (addome): forza, volontà.</li><li><b>Cuore</b> (petto): apertura, relazione.</li><li><b>Gola</b> (collo, voce): espressione.</li><li><b>Terzo occhio</b> (fronte): attenzione.</li><li><b>Corona</b> (sommità del capo): silenzio, connessione.</li></ul>
+  <p>Non serve crederci: gli esercizi agiscono su postura, respiro e sistema nervoso in ogni caso. È l'impostazione di <i>Il tuo corpo, il tuo centro</i>: due giorni per ogni centro, dalla radice alla corona.</p>`},
+ {id:"rituali-vuoto",d:"2026-09-21",t:"Il coraggio di non fare niente (e il senso di colpa)",c:"Mente",i:"🪑",bg:"#EFE6D6",m:"6 min",book:"noia",ex:"Spesso il tempo c'è. Quello che manca è il permesso. Come rispondere alla voce che dice 'trovati qualcosa di utile'.",
+  b:`<p>Federica aveva sul balcone una sedia di vimini comprata per guardare il tramonto. In cinque anni ci si era seduta tre volte. Il giorno in cui ci provò, resistette quattro minuti. Non era noia: era <b>senso di colpa</b>, e aveva la voce di sua madre: "Non stare lì senza fare niente".</p>
+  <h3>Tre tipi di tempo libero</h3><ul><li><b>Recupero</b>: dormire, riposare.</li><li><b>Svago</b>: leggere, uscire, fare sport.</li><li><b>Tempo vuoto</b>: niente di preciso, senza stimoli.</li></ul>
+  <p>Solo il terzo lascia davvero spazio alla mente per creare, ed è l'unico che socialmente sembra pigrizia.</p>
+  <h3>Rispondere alla voce</h3><p>Non si zittisce con la forza. Si indebolisce rispondendole: "Sto facendo qualcosa: sto lasciando spazio alla mia mente". Federica mise in calendario ogni sabato alle 16 un appuntamento chiamato <i>Sedia</i>. Al decimo sabato le venne l'idea che il suo gruppo aspettava da anni.</p>
+  <p>Capitolo 6 di <i>La noia, il vero motore della vita</i>.</p>`},
+ {id:"intenzione",d:"2026-10-05",t:"Intenzione, non obiettivo: come iniziare (e chiudere) la giornata",c:"Abitudini",i:"🤲",bg:"#E4EFE8",m:"5 min",book:"corpo",ex:"Un obiettivo può fallire, un'intenzione no. Un gesto di due minuti con le mani sul centro del corpo.",
+  b:`<p>Un obiettivo riguarda un risultato futuro: perdere tre chili, finire un progetto. Un'<b>intenzione</b> riguarda come vuoi essere adesso: "Oggi mi muovo con calma", "Oggi ascolto prima di rispondere". È una direzione, non una meta: se te ne allontani, puoi semplicemente tornarci.</p>
+  <h3>Le mani sul centro</h3><p>Il contatto caldo e gentile è uno dei segnali di sicurezza più potenti per il sistema nervoso, anche quando le mani sono le nostre.</p>
+  <h3>Il ritorno al centro</h3><ol><li>Seduto, occhi chiusi, una mano sul cuore e una sulla pancia. Tre respiri.</li><li>Porta entrambe le mani sulla pancia, sopra l'ombelico.</li><li>Formula l'intenzione: breve, al presente, in positivo.</li><li>Ripetila per tre espirazioni, come un seme nella terra.</li><li>Sfrega le mani, appoggiale sugli occhi, poi sul viso, e apri gli occhi.</li></ol>
+  <p>Al mattino l'intenzione riguarda come attraversare la giornata; alla sera, ciò che vuoi lasciare andare o per cui vuoi ringraziare. È l'esercizio che chiude la sequenza di <i>Il tuo corpo, il tuo centro</i>.</p>`},
+ {id:"stagione-autunno",d:"2026-10-12",t:"Mangiare di stagione: frutta e verdura d'autunno",c:"Alimentazione",i:"🎃",bg:"#F7DCC8",m:"4 min",book:null,ex:"Zucca, cavoli, castagne, mele e melagrane: cosa portare in tavola nei mesi freddi.",
+  b:`<p>Seguire la stagionalità significa mangiare prodotti più freschi, saporiti e spesso più economici, rispettando i ritmi della natura.</p>
+  <h3>In tavola in autunno</h3><ul><li><b>Verdura</b>: zucca, cavolo nero, broccoli, cavolfiore, porri, radicchio, finocchi.</li><li><b>Frutta</b>: mele, pere, cachi, melagrane, uva, i primi agrumi.</li><li><b>Frutta secca</b>: noci, castagne, nocciole.</li></ul>
+  <h3>Un'idea semplice</h3><p>Zuppa di cavolo nero, ceci e zucca con olio extravergine a crudo e pane tostato: calda, completa, confortante.</p>
+  <p>Per un piano alimentare personalizzato rivolgiti a un nutrizionista o a un dietista.</p>`},
+ {id:"noia-segnale",d:"2026-10-19",t:"Quando la noia non è un motore: i segnali da ascoltare",c:"Mente",i:"🫶",bg:"#E8E3EC",m:"5 min",book:"noia",ex:"Esiste una noia che apre spazio e un vuoto che pesa. Saperli distinguere è una forma di cura.",
+  b:`<p>La noia di cui parlo di solito è <b>situazionale</b>: nasce da un'attesa, un pomeriggio libero, un compito ripetitivo, e attraversata con consapevolezza lascia leggerezza. Ma a volte la stessa parola descrive altro: un vuoto persistente, esteso a tutto, anche alle cose che un tempo davano piacere.</p>
+  <h3>Segnali da non ignorare</h3><ul><li>Il senso di vuoto dura da più di due settimane, quasi ogni giorno.</li><li>Non provi più piacere in attività e persone che amavi.</li><li>Tristezza, irritabilità, senso di inutilità o di colpa.</li><li>Cambiamenti marcati nel sonno, nell'appetito, nell'energia.</li><li>Tendenza a isolarti.</li></ul>
+  <p>In questi casi la noia non è un motore ma un segnale d'allarme, e non si risolve con un esercizio. Il passo più utile è parlarne con il tuo medico di base o con uno psicologo. Se hai pensieri di farti del male, chiama subito il 112 o rivolgiti a una persona di fiducia. Chiedere aiuto è, anche questo, un atto di ascolto di sé.</p>
+  <h3>La domanda guida</h3><p>Come mi sento dopo? Più leggero, o più pesante? Ne parlo nel capitolo 13 di <i>La noia, il vero motore della vita</i>.</p>`},
+ {id:"dispensa-inverno",d:"2026-11-02",t:"La dispensa naturale per l'inverno: miele, rosa canina e agrumi",c:"Alimentazione",i:"🍯",bg:"#F6E6C4",m:"5 min",book:null,ex:"Ingredienti semplici e tradizionali da avere in casa quando arriva il freddo.",
+  b:`<p>Con l'arrivo del freddo la tradizione popolare ha sempre avuto i suoi alleati in dispensa. Non sono farmaci, ma ingredienti che rendono più piacevoli le giornate d'inverno.</p>
+  <h3>Cosa tenere in casa</h3><ul><li><b>Miele</b>: in una bevanda tiepida (non bollente) con limone è un classico delle serate fredde. Mai ai bambini sotto i 12 mesi.</li><li><b>Rosa canina</b>: le bacche essiccate danno un infuso rosso e acidulo, naturalmente ricco di vitamina C.</li><li><b>Agrumi di stagione</b>: arance, mandarini e limoni, meglio freschi che spremuti e lasciati lì.</li><li><b>Zenzero fresco</b>: per infusi caldi e piatti.</li><li><b>Timo</b>: in cucina e in infuso, tradizionalmente usato nella stagione fredda.</li></ul>
+  <p>Sonno regolare, movimento all'aperto e un'alimentazione varia restano la base. In caso di febbre o sintomi che non passano, rivolgiti al medico.</p>`}
+];
+
+/* ---------- ROUTER ---------- */
+const views=["home","rilassamento","meditazioni","pilates","libri","blog","centro","contatti"];
+function route(){
+  let h=(location.hash||"#home").slice(1);
+  if(!views.includes(h)) h="home";
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+h));
+  document.querySelectorAll(".menu a").forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+h));
+  document.querySelector(".menu").classList.remove("open");
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+
+/* ---------- RENDER ---------- */
+posts.sort((a,b)=>b.d.localeCompare(a.d));
+const MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
+const fmtD=d=>{const[y,m,g]=d.split("-");return `${+g} ${MESI[+m-1]} ${y}`};
+function bookBadge(p){return p.book?`<span style="display:inline-flex;align-items:center;gap:6px;color:var(--emerald)">📖 ${BOOKS[p.book].t}</span>`:""}
+function postCard(p){return `<div class="card"><div class="post-cover" style="background:${p.bg}">${p.i}</div><span class="tag">${p.c}</span><h3>${p.t}</h3><p>${p.ex}</p><div class="meta"><span>📅 ${fmtD(p.d)}</span><span>⏱ ${p.m}</span>${bookBadge(p)}</div><button class="link" onclick="openPost('${p.id}')">Leggi l'articolo →</button></div>`}
+function bookBox(k){const b=BOOKS[k];return `<div class="bookbox"><img src="${b.img}" alt="Copertina di ${b.t}"><div><span class="tag">Dal libro</span><h3 style="margin:4px 0 6px">${b.t}</h3><p style="font-size:.9rem;margin-bottom:14px">${b.s}. Di Alessandro Marchetti.</p><div class="btns"><a class="btn btn-g" href="${b.url}" target="_blank" rel="noopener">Acquista su Amazon</a><a class="btn btn-o" href="#libri">Scopri il libro</a></div></div></div>`}
+document.getElementById("home-posts").innerHTML=posts.slice(0,3).map(postCard).join("");
+
+const cats=["Tutti",...new Set(posts.map(p=>p.c))];
+const bF=document.getElementById("bFilter");
+bF.innerHTML=cats.map((c,i)=>`<button class="pill ${i?"":"on"}" data-c="${c}">${c}</button>`).join("");
+function renderBlog(c){document.getElementById("blog-list").innerHTML=posts.filter(p=>c==="Tutti"||p.c===c).map(postCard).join("")}
+bF.onclick=e=>{const b=e.target.closest(".pill");if(!b)return;bF.querySelectorAll(".pill").forEach(x=>x.classList.remove("on"));b.classList.add("on");renderBlog(b.dataset.c)};
+renderBlog("Tutti");
+["corpo","noia"].forEach(k=>{const r=posts.filter(p=>p.book===k).slice(0,4);document.getElementById("rel-"+k).innerHTML="<b>Articoli dal libro:</b>"+r.map(p=>`<a onclick="openPost('${p.id}')">→ ${p.t}</a>`).join("")});
+
+function openPost(id){const p=posts.find(x=>x.id===id);
+  document.getElementById("modal-c").innerHTML=`<span class="tag">${p.c}</span><h2>${p.t}</h2><div class="meta" style="margin:0 0 20px">📅 ${fmtD(p.d)} · ⏱ ${p.m} di lettura · Alessandro Marchetti</div>${p.b}${p.book?bookBox(p.book):""}<div class="note">Le informazioni di questo articolo hanno scopo divulgativo e non sostituiscono il parere del medico, del farmacista o di un professionista sanitario. In caso di patologie, gravidanza, allattamento o terapie in corso, consulta sempre il tuo medico prima di utilizzare rimedi naturali.</div>`;
+  document.getElementById("modal").classList.add("on");document.body.style.overflow="hidden"}
+function openMed(i){const m=meditations[i];
+  document.getElementById("modal-c").innerHTML=`<span class="tag">${m.c} · ${m.d}</span><h2>${m.i} ${m.t}</h2><p>Trova una posizione comoda, imposta il timer e segui questi passaggi con calma.</p><ol class="steps" style="margin-top:20px">${m.s.map(x=>`<li>${x}</li>`).join("")}</ol>`;
+  document.getElementById("modal").classList.add("on");document.body.style.overflow="hidden"}
+function closeModal(){document.getElementById("modal").classList.remove("on");document.body.style.overflow=""}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+document.getElementById("modal-c").addEventListener("click",e=>{if(e.target.matches('a[href^="#"]'))closeModal()});
+
+document.getElementById("med-list").innerHTML=meditations.map((m,i)=>`<div class="card"><div class="ico">${m.i}</div><span class="tag">${m.c} · ${m.d}</span><h3>${m.t}</h3><p>${m.s[0]}</p><button class="link" onclick="openMed(${i})">Inizia la pratica →</button></div>`).join("");
+
+const lvN=["","Principiante","Intermedio","Avanzato"];
+function renderEx(l){document.getElementById("ex-list").innerHTML=exercises.map((e,i)=>({e,i})).filter(o=>l==="all"||o.e.l==+l).map(({e,i})=>`<div class="card ex"><div class="ex-num">${String(i+1).padStart(2,"0")}</div><div><h3>${e.n}</h3><div style="display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--grey)"><div class="level">${[1,2,3].map(n=>`<i class="${n<=e.l?"f":""}"></i>`).join("")}</div>${lvN[e.l]} · ${e.r}</div><p style="margin-top:10px">${e.s}</p><div class="meta">🎯 ${e.f}</div></div></div>`).join("")}
+const pF=document.getElementById("pFilter");
+pF.onclick=e=>{const b=e.target.closest(".pill");if(!b)return;pF.querySelectorAll(".pill").forEach(x=>x.classList.remove("on"));b.classList.add("on");renderEx(b.dataset.l)};
+renderEx("all");
+
+/* ---------- RESPIRAZIONE ---------- */
+let pat=[4,4,4,4],bTimer=null,cycles=0;
+const circle=document.getElementById("circle");
+document.getElementById("patterns").onclick=e=>{const b=e.target.closest(".pill");if(!b)return;document.querySelectorAll("#patterns .pill").forEach(x=>x.classList.remove("on"));b.classList.add("on");pat=b.dataset.p.split(",").map(Number);stopBreath()};
+function phase(i){
+  const names=["Inspira","Trattieni","Espira","Trattieni"];
+  const d=pat[i];
+  if(!d){bTimer=setTimeout(()=>phase((i+1)%4),0);return}
+  circle.style.transitionDuration=(i===0||i===2?d:0.3)+"s";
+  if(i===0)circle.style.transform="scale(1.9)";
+  if(i===2)circle.style.transform="scale(1)";
+  let left=d;circle.innerHTML=names[i]+"<br>"+left;
+  const iv=setInterval(()=>{left--;if(left>0)circle.innerHTML=names[i]+"<br>"+left},1000);
+  bTimer=setTimeout(()=>{clearInterval(iv);if(i===3||(i===2&&!pat[3])){cycles++;document.getElementById("bCount").textContent="Cicli completati: "+cycles}phase((i+1)%4)},d*1000);
+  bTimer.iv=iv;
+}
+function stopBreath(){if(bTimer){clearTimeout(bTimer);clearInterval(bTimer.iv)}bTimer=null;circle.style.transitionDuration="1s";circle.style.transform="scale(1)";circle.textContent="Pronto"}
+document.getElementById("bStart").onclick=()=>{stopBreath();cycles=0;document.getElementById("bCount").textContent="Cicli completati: 0";phase(0)};
+document.getElementById("bStop").onclick=stopBreath;
+
+/* ---------- TIMER MEDITAZIONE ---------- */
+let tMin=5,tLeft=300,tIv=null;
+const tD=document.getElementById("tDisplay"),tS=document.getElementById("tStart");
+const fmt=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+document.getElementById("tMins").onclick=e=>{const b=e.target.closest(".pill");if(!b)return;document.querySelectorAll("#tMins .pill").forEach(x=>x.classList.remove("on"));b.classList.add("on");tMin=+b.dataset.m;resetT()};
+function bell(){try{const a=new (window.AudioContext||window.webkitAudioContext)();[528,396].forEach((f,k)=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=f;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.25,a.currentTime+k*.6);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+k*.6+3);o.start(a.currentTime+k*.6);o.stop(a.currentTime+k*.6+3)})}catch(e){}}
+function resetT(){clearInterval(tIv);tIv=null;tLeft=tMin*60;tD.textContent=fmt(tLeft);tS.textContent="▶ Avvia"}
+tS.onclick=()=>{if(tIv){clearInterval(tIv);tIv=null;tS.textContent="▶ Riprendi";return}
+  bell();tS.textContent="❚❚ Pausa";tIv=setInterval(()=>{tLeft--;tD.textContent=fmt(tLeft);if(tLeft<=0){clearInterval(tIv);tIv=null;bell();tD.textContent="Fine 🙏";tS.textContent="▶ Avvia";tLeft=tMin*60}},1000)};
+document.getElementById("tReset").onclick=resetT;
+
+/* ---------- FORM ---------- */
+
+route();
+</script>
+</body>
+</html>
